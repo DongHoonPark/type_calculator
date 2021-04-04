@@ -20,6 +20,8 @@ function QFixed(){
     const [hex, setHex] = useState<string>("0")
     const [value, setValue] = useState<string>("0")
 
+    const [convDirection, setConvDirection] = useState<string>("binary_to_value")
+
     const onTypeSignedInputChanged : React.ChangeEventHandler<HTMLInputElement> = (e) =>{
         const { value, name } = e.target
         if(value === "Signed")
@@ -72,6 +74,7 @@ function QFixed(){
             switch(e.target){
                 case valueRef.current:
                     setHex((val2hex(parseFloat(value), type).toString()))
+                    setValue((hex2val(hex, type).toString()))
                     break
                 case hexRef.current:
                     setValue((hex2val(hex, type).toString()))
