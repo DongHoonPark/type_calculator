@@ -12,6 +12,7 @@ import {
 import { Nav, Navbar } from 'react-bootstrap';
 import {AiFillCalculator} from 'react-icons/ai'
 import {FaCalculator} from 'react-icons/fa'
+import QFixed from './pages/QFixed';
 
 function App() {
   let link_style : CSSProperties = {
@@ -36,7 +37,7 @@ function App() {
         <Switch>
           <Route path="/float32"></Route>
           <Route path="/float64"></Route>
-          <Route path="/qfixed"></Route>
+          <Route path="/qfixed"><QFixed></QFixed></Route>
           <Route path="/fixed_arithmetic"></Route>
         </Switch>
       </Router>
