@@ -7,12 +7,16 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom"
 import { Nav, Navbar } from 'react-bootstrap';
 import {AiFillCalculator} from 'react-icons/ai'
 import {FaCalculator} from 'react-icons/fa'
-import QFixed from './pages/QFixed';
+import FixedPage from './pages/Fixed';
+import FloatingPage from './pages/Floating';
+import AboutPage from './pages/About';
+import { Form } from 'react-bootstrap';
 
 function App() {
   let link_style : CSSProperties = {
@@ -22,23 +26,22 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar bg="light" expand="lg">
+        <Redirect exact from="/" to="/qfixed" />
+        <Navbar bg="dark" variant="dark" expand="lg">
           <Navbar.Brand> <FaCalculator/> Type Calculator </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav>
-              <Nav.Link><Link to="/float32" style={link_style}>Float32</Link></Nav.Link>
-              <Nav.Link><Link to="/float64" style={link_style}>Float64</Link></Nav.Link>
-              <Nav.Link><Link to="/qfixed"  style={link_style}>Q-Fixed</Link></Nav.Link>
-              <Nav.Link><Link to="/fixed_arithmetic" style={link_style}>Fixed Arithmetic</Link></Nav.Link>
+              <Nav.Link><Link to="/float" style={link_style}>Floating Point</Link></Nav.Link>
+              <Nav.Link><Link to="/qfixed"  style={link_style}>Fixed Point</Link></Nav.Link>
+              <Nav.Link><Link to="/about"  style={link_style}>About</Link></Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
         <Switch>
-          <Route path="/float32"></Route>
-          <Route path="/float64"></Route>
-          <Route path="/qfixed"><QFixed></QFixed></Route>
-          <Route path="/fixed_arithmetic"></Route>
+          <Route path="/float"><FloatingPage></FloatingPage></Route>
+          <Route path="/qfixed"><FixedPage></FixedPage></Route>
+          <Route path="/about"><AboutPage></AboutPage></Route>
         </Switch>
       </Router>
     </>

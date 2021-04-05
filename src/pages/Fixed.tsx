@@ -6,7 +6,7 @@ import { get_type_bitlens, hex2val, val2hex } from '../Misc';
 const isNumber = (input : string) =>{ return '0' <= input && input <= '9'}
 
 
-function QFixed(){
+function FixedPage(){
     const integerRef = useRef<any>()
     const fractionRef = useRef<any>()
     const hexRef = useRef<any>()
@@ -90,6 +90,7 @@ function QFixed(){
     return(
         <>
         <Container>
+            <p></p>
             <Form>
             <Form.Label>Q-Fixed Type : {type} / {get_type_bitlens(type?type:"q0.0").reduce((a,c)=>a+c)}bit</Form.Label>
             <Form.Row>
@@ -126,4 +127,4 @@ function QFixed(){
     )
 }
 
-export default QFixed
+export default FixedPage
