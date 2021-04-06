@@ -1,26 +1,16 @@
-import React, { CSSProperties, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Container, Form, Col, Button } from 'react-bootstrap';
-import BitsPanel from '../components/BitsPanel';
-import { get_type_bitlens, hex2val, val2hex } from '../Misc';
-
-const isNumber = (input : string) =>{ return '0' <= input && input <= '9'}
-
+import CalcPanel from '../components/CalcPanel';
+import { get_type_bitlens, hex2val, val2hex, isNumber } from '../Misc';
 
 function FixedPage(){
     const integerRef = useRef<any>()
     const fractionRef = useRef<any>()
-    const hexRef = useRef<any>()
-    const valueRef = useRef<any>()
 
-    const [type, setType] = useState<string>("q0.0")
-    const [signed, setSigned] = useState<string>("q")
-    const [integer, setInteger] = useState<string>("0")
+    const [type, setType]         = useState<string>("q0.0")
+    const [signed, setSigned]     = useState<string>("q")
+    const [integer, setInteger]   = useState<string>("0")
     const [fraction, setFraction] = useState<string>("0")
-
-    const [hex, setHex] = useState<string>("0")
-    const [value, setValue] = useState<string>("0")
-
-    const [convDirection, setConvDirection] = useState<string>("binary_to_value")
 
     const onTypeSignedInputChanged : React.ChangeEventHandler<HTMLInputElement> = (e) =>{
         const { value, name } = e.target
@@ -50,66 +40,6 @@ function FixedPage(){
         setType("".concat(signed?signed:"" , integer?integer:"", ".", fraction?fraction:""))
     }, [signed, integer, fraction])
 
-    useEffect(()=>{
-        valueRef.current.value = value
-    },[value])
-
-    useEffect(()=>{
-        hexRef.current.value = hex
-    },[hex])
-
-    const onHexInputChanged : React.ChangeEventHandler<HTMLInputElement> = (e) =>{
-        const { value, name } = e.target
-        let input = value.charAt(value.length - 1).toLowerCase()
-        setConvDirection("toValue")
-        if(isNumber(input) || ('a' <= input && input <= 'f')){
-            setHex(e.target.value)
-        }
-        else{
-            e.target.value = value.slice(0, -1)
-        }
-    }
-
-    const fromValue = ()=>{
-        let hexUpdate = (val2hex(parseFloat(value), type).toString())
-        setHex(hexUpdate)
-        setValue((hex2val(hexUpdate, type).toString()))
-    }
-
-    const toValue = ()=>{
-        setValue((hex2val(hex, type).toString()))
-    }
-
-    const onEnterPressed : React.KeyboardEventHandler<HTMLInputElement>=(e)=>{
-        if (e.key === 'Enter') {
-            switch(e.target){
-                case valueRef.current:
-                    fromValue()
-                    break
-                case hexRef.current:
-                    toValue()
-                    break
-            }
-        }
-    }
-
-    const onValueInputChanged : React.ChangeEventHandler<HTMLInputElement> = (e) =>{
-        setConvDirection("fromValue")
-        setValue(e.target.value)
-    }
-
-    const onCalculateButtonClicked : React.MouseEventHandler = ()=>{
-        switch(convDirection){
-            case "fromValue":
-                fromValue()
-                break
-            case "toValue":
-                toValue()
-                break
-            default:
-                break
-        }
-    }
 
     return(
         <>
@@ -126,7 +56,7 @@ function FixedPage(){
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="integer" >
-                <Form.Control type="text" placeholder="Integer" defaultValue={0} onChange={onTypeNumberInputChanged} ref={integerRef}/>
+                    <Form.Control type="text" placeholder="Integer" defaultValue={0} onChange={onTypeNumberInputChanged} ref={integerRef}/>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="fraction">
@@ -134,17 +64,7 @@ function FixedPage(){
                 </Form.Group>
             </Form.Row>
             </Form>
-            <Form.Group>
-                <Form.Label>Hex Representation</Form.Label>
-                <Form.Control type="text" placeholder="hex" onKeyPress={onEnterPressed} onChange={onHexInputChanged} ref={hexRef}/>
-                <br/>
-                <Form.Label>Value</Form.Label>
-                <Form.Control type="text" placeholder="value in decimal" onKeyPress={onEnterPressed} onChange={onValueInputChanged} ref={valueRef}/>
-            </Form.Group>
-            <br/>
-            <Button onClick={onCalculateButtonClicked}>Calculate</Button>
-            {/* <BitsPanel>
-            </BitsPanel> */}
+            <CalcPanel type={type}></CalcPanel>
         </Container>
 
         </>

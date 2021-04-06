@@ -1,6 +1,7 @@
 const is_unsigned_fixed = (type:string)=>RegExp("^uq[0-9]+\\.[0-9]+$").test(type.toLowerCase())
 const is_signed_fixed   = (type:string)=>RegExp("^q[0-9]+\\.[0-9]+$").test(type.toLowerCase())
 const is_fixed          = (type:string)=>is_signed_fixed(type)||is_unsigned_fixed(type)
+export const isNumber = (input : string) =>{ return '0' <= input && input <= '9'}
 
 export function get_type_bitlens(type : string){
     type = type.toLowerCase()
@@ -60,10 +61,10 @@ export function hex2val(hex : string, type:string){
         return val
     }
     else if(type === 'float32'){
-        return new Float32Array(Uint8Array.from(Buffer.from(hex, 'hex').reverse()).buffer)[0]
+        return Buffer.from(hex, 'hex').readFloatBE(0)
     }
     else if(type === 'float64'){
-        return new Float64Array(Uint8Array.from(Buffer.from(hex, 'hex').reverse()).buffer)[0]
+        return Buffer.from(hex, 'hex').readDoubleBE(0)
     }
     else{
         return 0
@@ -85,13 +86,22 @@ export function val2hex(val : number, type:string){
         }
 
         let hexlen = Math.ceil(bitlen / 4) 
-        return integer2hex(integer, hexlen)
+        let hex = integer2hex(integer, hexlen)
+
+        if(hex.length > hexlen){
+            hex = hex.slice(1)
+        }
+        return hex
     }
     else if(type === 'float32'){
-        return "0"
+        let buf = Buffer.alloc(4)
+        buf.writeFloatBE(val, 0)
+        return buf.toJSON().data.map(x=>x.toString(16).padStart(2, '0')).join("")
     }
     else if(type === 'float64'){
-        return "0"
+        let buf = Buffer.alloc(8)
+        buf.writeDoubleBE(val, 0)
+        return buf.toJSON().data.map(x=>x.toString(16).padStart(2, '0')).join("")
     }
     else{
         return "0"

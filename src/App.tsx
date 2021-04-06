@@ -25,7 +25,7 @@ function App() {
   }
   return (
     <>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Redirect exact from="/" to="/fixed" />
         <Navbar bg="dark" variant="dark" expand="lg">
           <Navbar.Brand> <FaCalculator/> Type Calculator </Navbar.Brand>
