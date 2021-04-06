@@ -26,21 +26,21 @@ function App() {
   return (
     <>
       <Router>
-        <Redirect exact from="/" to="/qfixed" />
+        <Redirect exact from="/" to="/fixed" />
         <Navbar bg="dark" variant="dark" expand="lg">
           <Navbar.Brand> <FaCalculator/> Type Calculator </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav>
               <Nav.Link><Link to="/float" style={link_style}>Floating Point</Link></Nav.Link>
-              <Nav.Link><Link to="/qfixed"  style={link_style}>Fixed Point</Link></Nav.Link>
+              <Nav.Link><Link to="/fixed"  style={link_style}>Fixed Point</Link></Nav.Link>
               <Nav.Link><Link to="/about"  style={link_style}>About</Link></Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
         <Switch>
           <Route path="/float"><FloatingPage></FloatingPage></Route>
-          <Route path="/qfixed"><FixedPage></FixedPage></Route>
+          <Route path="/fixed"><FixedPage></FixedPage></Route>
           <Route path="/about"><AboutPage></AboutPage></Route>
         </Switch>
       </Router>

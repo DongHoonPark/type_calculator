@@ -61,6 +61,7 @@ function FixedPage(){
     const onHexInputChanged : React.ChangeEventHandler<HTMLInputElement> = (e) =>{
         const { value, name } = e.target
         let input = value.charAt(value.length - 1).toLowerCase()
+        setConvDirection("toValue")
         if(isNumber(input) || ('a' <= input && input <= 'f')){
             setHex(e.target.value)
         }
@@ -69,22 +70,45 @@ function FixedPage(){
         }
     }
 
+    const fromValue = ()=>{
+        let hexUpdate = (val2hex(parseFloat(value), type).toString())
+        setHex(hexUpdate)
+        setValue((hex2val(hexUpdate, type).toString()))
+    }
+
+    const toValue = ()=>{
+        setValue((hex2val(hex, type).toString()))
+    }
+
     const onEnterPressed : React.KeyboardEventHandler<HTMLInputElement>=(e)=>{
         if (e.key === 'Enter') {
             switch(e.target){
                 case valueRef.current:
-                    setHex((val2hex(parseFloat(value), type).toString()))
-                    setValue((hex2val(hex, type).toString()))
+                    fromValue()
                     break
                 case hexRef.current:
-                    setValue((hex2val(hex, type).toString()))
+                    toValue()
                     break
             }
         }
     }
 
     const onValueInputChanged : React.ChangeEventHandler<HTMLInputElement> = (e) =>{
+        setConvDirection("fromValue")
         setValue(e.target.value)
+    }
+
+    const onCalculateButtonClicked : React.MouseEventHandler = ()=>{
+        switch(convDirection){
+            case "fromValue":
+                fromValue()
+                break
+            case "toValue":
+                toValue()
+                break
+            default:
+                break
+        }
     }
 
     return(
@@ -118,7 +142,7 @@ function FixedPage(){
                 <Form.Control type="text" placeholder="value in decimal" onKeyPress={onEnterPressed} onChange={onValueInputChanged} ref={valueRef}/>
             </Form.Group>
             <br/>
-            <Button>Calculate</Button>
+            <Button onClick={onCalculateButtonClicked}>Calculate</Button>
             {/* <BitsPanel>
             </BitsPanel> */}
         </Container>
