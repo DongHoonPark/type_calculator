@@ -69,7 +69,7 @@ export function hex2val(hex : string, type:string){
         
         let val = integer / unit
         if(is_signed_fixed(type) && hex2bits(hex, type)[0] === 1){
-            val -= 1<< (2 + bitlens[1])
+            val -= 1<< (1 + bitlens[1])
         }
         return val
     }
@@ -95,7 +95,7 @@ export function val2hex(val : number, type:string){
         let bitlen = bitlens.reduce((a,c)=>a+c)
         
         if(integer < 0){
-            integer += 1 << bitlen + 1
+            integer += 1 << bitlen
         }
 
         let hexlen = Math.ceil(bitlen / 4) 
