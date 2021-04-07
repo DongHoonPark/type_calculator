@@ -1,3 +1,5 @@
+import { chunker } from "./Misc"
+
 const is_unsigned_fixed = (type:string)=>RegExp("^uq[0-9]+\\.[0-9]+$").test(type.toLowerCase())
 const is_signed_fixed   = (type:string)=>RegExp("^q[0-9]+\\.[0-9]+$").test(type.toLowerCase())
 const is_fixed          = (type:string)=>is_signed_fixed(type)||is_unsigned_fixed(type)
@@ -26,26 +28,37 @@ export function get_type_bitlens(type : string){
 }
             
 export function hex2bits(hex : string, type : string){
-    let integer = parseInt(hex, 16)
     let ret = []
-    for(let i = 0; i < get_type_bitlens(type).reduce((a,c)=>a+c); i++){
-        ret.push(integer&(1<<i) ? 1 : 0)
+    for(let i = hex.length - 1; i >= 0; i--){
+        let integer = parseInt(hex[i], 16)
+        for(let j = 0; j < 4; j++){
+            ret.push(integer & (1<<j) ? 1 : 0)
+            if(ret.length === get_type_bitlens(type).reduce((a,c)=>a+c)){
+                return ret.reverse()
+            }
+        }
+    }
+    while(ret.length < get_type_bitlens(type).reduce((a,c)=>a+c)){
+        ret.push(0)
     }
     return ret.reverse()
 }
 
 export function bits2hex(bits : number[]){
     const integer2hex = (num : number, places : number) => num.toString(16).padStart(places, '0')
-    let integer = 0;
     let bits_rcopy = bits.slice().reverse()
-    for(let i = 0; i < bits_rcopy.length; i++){
-        if(bits_rcopy[i] == 1){
-            integer += (1<<i)
+    let qbits_chunk = chunker(bits_rcopy, 4).reverse()
+    let ret = ""
+    for(let qbits of qbits_chunk){
+        let integer = 0
+        for(let i = 0; i < qbits.length; i++){
+            if(qbits[i] === 1){
+                integer += 1<<i
+            }
         }
+        ret = ret.concat(integer2hex(integer, 1))
     }
-    let hexlen = Math.ceil(bits.length / 4) 
-
-    return integer2hex(integer, hexlen)
+    return ret
 }
 
 export function hex2val(hex : string, type:string){
