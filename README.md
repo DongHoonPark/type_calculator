@@ -11,4 +11,3 @@ Bit-wise editable view with various type supports.
 * IEEE754 Single / Double precision floating point tool
 * Q-Format fixed point tool
 
-
