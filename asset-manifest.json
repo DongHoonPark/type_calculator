@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/type_calculator/static/css/main.2ae47eeb.chunk.css",
-    "main.js": "/type_calculator/static/js/main.a4a74c57.chunk.js",
-    "main.js.map": "/type_calculator/static/js/main.a4a74c57.chunk.js.map",
-    "runtime-main.js": "/type_calculator/static/js/runtime-main.e9945c68.js",
-    "runtime-main.js.map": "/type_calculator/static/js/runtime-main.e9945c68.js.map",
+    "main.js": "/type_calculator/static/js/main.74b174df.chunk.js",
+    "main.js.map": "/type_calculator/static/js/main.74b174df.chunk.js.map",
+    "runtime-main.js": "/type_calculator/static/js/runtime-main.2dc75f14.js",
+    "runtime-main.js.map": "/type_calculator/static/js/runtime-main.2dc75f14.js.map",
     "static/css/2.150d169a.chunk.css": "/type_calculator/static/css/2.150d169a.chunk.css",
-    "static/js/2.7be2cbd5.chunk.js": "/type_calculator/static/js/2.7be2cbd5.chunk.js",
-    "static/js/2.7be2cbd5.chunk.js.map": "/type_calculator/static/js/2.7be2cbd5.chunk.js.map",
-    "static/js/3.14f5c681.chunk.js": "/type_calculator/static/js/3.14f5c681.chunk.js",
-    "static/js/3.14f5c681.chunk.js.map": "/type_calculator/static/js/3.14f5c681.chunk.js.map",
+    "static/js/2.7b1c56ba.chunk.js": "/type_calculator/static/js/2.7b1c56ba.chunk.js",
+    "static/js/2.7b1c56ba.chunk.js.map": "/type_calculator/static/js/2.7b1c56ba.chunk.js.map",
+    "static/js/3.1c5633c4.chunk.js": "/type_calculator/static/js/3.1c5633c4.chunk.js",
+    "static/js/3.1c5633c4.chunk.js.map": "/type_calculator/static/js/3.1c5633c4.chunk.js.map",
     "index.html": "/type_calculator/index.html",
     "static/css/2.150d169a.chunk.css.map": "/type_calculator/static/css/2.150d169a.chunk.css.map",
     "static/css/main.2ae47eeb.chunk.css.map": "/type_calculator/static/css/main.2ae47eeb.chunk.css.map",
-    "static/js/2.7be2cbd5.chunk.js.LICENSE.txt": "/type_calculator/static/js/2.7be2cbd5.chunk.js.LICENSE.txt",
+    "static/js/2.7b1c56ba.chunk.js.LICENSE.txt": "/type_calculator/static/js/2.7b1c56ba.chunk.js.LICENSE.txt",
     "static/media/About.md": "/type_calculator/static/media/About.92a792de.md"
   },
   "entrypoints": [
-    "static/js/runtime-main.e9945c68.js",
+    "static/js/runtime-main.2dc75f14.js",
     "static/css/2.150d169a.chunk.css",
-    "static/js/2.7be2cbd5.chunk.js",
+    "static/js/2.7b1c56ba.chunk.js",
     "static/css/main.2ae47eeb.chunk.css",
-    "static/js/main.a4a74c57.chunk.js"
+    "static/js/main.74b174df.chunk.js"
   ]
 }
