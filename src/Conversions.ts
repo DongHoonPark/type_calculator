@@ -68,11 +68,8 @@ export function hex2val(hex : string, type:string){
         let unit = 1<<bitlens[2]
         
         let val = integer / unit
-        console.log(val)
-        console.log(bitlens)
         if(is_signed_fixed(type) && hex2bits(hex, type)[0] === 1){
             val -= 1<< (2 + bitlens[1])
-            console.log(1<< (2 + bitlens[1]))
         }
         return val
     }
