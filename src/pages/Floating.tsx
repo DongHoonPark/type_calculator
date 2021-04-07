@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Container, Form, Col, Button } from 'react-bootstrap';
 import CalcPanel from '../components/CalcPanel';
-import { get_type_bitlens, hex2val, val2hex, isNumber } from '../Misc';
+import { get_type_bitlens, hex2val, val2hex, isNumber } from '../Conversions';
 
 function FloatingPage(){
     const [type, setType] = useState<string>("float32")

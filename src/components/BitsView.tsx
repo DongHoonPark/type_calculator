@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import {get_type_bitlens, hex2bits} from '../Misc'
+import {get_type_bitlens, hex2bits} from '../Conversions'
 
 function BitsPanel(hex : string, type : string){
     let bitlens = get_type_bitlens(type) // length info of bits of data
