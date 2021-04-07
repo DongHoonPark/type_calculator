@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Container, Form, Col, Row, Button, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import { Form, Col, Row, Button, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import { get_type_bitlens, hex2val, val2hex, isNumber, hex2bits, bits2hex } from '../Conversions';
 import {useWindowWidth} from '@react-hook/window-size'
 import { chunker } from '../Misc';
@@ -19,7 +19,7 @@ export default function CalcPanel({type}:CalcPanelProps){
     const [convDirection, setConvDirection] = useState<string>("binary_to_value")
 
     const width = useWindowWidth()
-    const [bvCol, setBvCol] = useState<number>(8)
+    const [bvCol] = useState<number>(8)
 
     useEffect(()=>{
         valueRef.current.value = value
@@ -34,7 +34,7 @@ export default function CalcPanel({type}:CalcPanelProps){
     },[width])
 
     const onHexInputChanged : React.ChangeEventHandler<HTMLInputElement> = (e) =>{
-        const { value, name } = e.target
+        const { value } = e.target
         let input = value.charAt(value.length - 1).toLowerCase()
         setConvDirection("toValue")
         if(isNumber(input) || ('a' <= input && input <= 'f')){
@@ -131,18 +131,16 @@ export default function CalcPanel({type}:CalcPanelProps){
 
                                 return(
                                     <ToggleButton value={bindex} variant={variant} disabled={disabled} onClick={(e)=>{
-                                        if(e.currentTarget == e.target){
+                                        if(e.currentTarget === e.target){
                                             setConvDirection("toValue")
+                                            let bits_tmp = hex2bits(hex, type)
                                             if(v === 0){
-                                                let bits_tmp = hex2bits(hex, type)
                                                 bits_tmp[index] = 1
-                                                setHex(bits2hex(bits_tmp))
                                             }
                                             else{
-                                                let bits_tmp = hex2bits(hex, type)
                                                 bits_tmp[index] = 0
-                                                setHex(bits2hex(bits_tmp))
                                             }
+                                            setHex(bits2hex(bits_tmp))
                                         }
                                     }}>
                                         {v}

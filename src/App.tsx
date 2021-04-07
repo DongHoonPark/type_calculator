@@ -1,5 +1,4 @@
 import React, { CSSProperties } from 'react';
-import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import './App.css';
@@ -11,12 +10,10 @@ import {
   Redirect
 } from "react-router-dom"
 import { Nav, Navbar } from 'react-bootstrap';
-import {AiFillCalculator} from 'react-icons/ai'
 import {FaCalculator} from 'react-icons/fa'
 import FixedPage from './pages/Fixed';
 import FloatingPage from './pages/Floating';
 import AboutPage from './pages/About';
-import { Form } from 'react-bootstrap';
 
 function App() {
   let link_style : CSSProperties = {

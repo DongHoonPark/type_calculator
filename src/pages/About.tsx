@@ -1,4 +1,4 @@
-import { Container, Jumbotron } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import gfm from 'remark-gfm'
 import emoji from 'remark-emoji'

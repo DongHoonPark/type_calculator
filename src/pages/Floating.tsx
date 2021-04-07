@@ -1,13 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Container, Form, Col, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Form, Col } from 'react-bootstrap';
 import CalcPanel from '../components/CalcPanel';
-import { get_type_bitlens, hex2val, val2hex, isNumber } from '../Conversions';
 
 function FloatingPage(){
     const [type, setType] = useState<string>("float32")
 
     const onTypeChange : React.ChangeEventHandler<HTMLInputElement> = (e) =>{
-        const { value, name } = e.target
+        const { value } = e.target
         switch(value){
             case 'Single 32b':
                 setType('float32')

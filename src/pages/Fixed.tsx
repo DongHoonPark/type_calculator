@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Container, Form, Col, Button } from 'react-bootstrap';
+import { Container, Form, Col } from 'react-bootstrap';
 import CalcPanel from '../components/CalcPanel';
-import { get_type_bitlens, hex2val, val2hex, isNumber } from '../Conversions';
+import { get_type_bitlens, isNumber } from '../Conversions';
 
 function FixedPage(){
     const integerRef = useRef<any>()
@@ -13,7 +13,7 @@ function FixedPage(){
     const [fraction, setFraction] = useState<string>("8")
 
     const onTypeSignedInputChanged : React.ChangeEventHandler<HTMLInputElement> = (e) =>{
-        const { value, name } = e.target
+        const { value } = e.target
         if(value === "Signed")
             setSigned("q")
         else
@@ -21,7 +21,7 @@ function FixedPage(){
 
     }
     const onTypeNumberInputChanged : React.ChangeEventHandler<HTMLInputElement> = (e) =>{
-        const { value, name } = e.target
+        const { value } = e.target
         let input = value.charAt(value.length - 1)
         if(!isNumber(input)){
             e.target.value = value.slice(0, -1)
